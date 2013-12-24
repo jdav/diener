@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class Server {
+public class Server implements Runnable {
 	
 	private RequestFactory factory = null;
 	private int port = 0;
@@ -45,5 +45,14 @@ public class Server {
 	
 	public void shutDown() {
 		up = false;
+	}
+
+	@Override
+	public void run() {
+		try {
+			startUp();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
